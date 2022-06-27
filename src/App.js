@@ -7,6 +7,7 @@ import { KontaktView } from './views/KontaktView'
 import { ProfilView } from './views/ProfilView'
 import { projects } from './projects/@projects'
 
+// test
 function App() {  
 
     const navItems = [
