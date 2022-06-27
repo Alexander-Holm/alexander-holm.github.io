@@ -1,0 +1,193 @@
+.navbar{
+    --text-decoration: 3px underline var(--orange-navbar);
+
+    /* TODO: kommentar varför navbar-border-fix */
+    z-index: 99;
+    position: sticky;
+    top: 0;
+    background-color: var(--navbar-background);
+    transition: border-radius var(--container-transition-speed);
+    width: 100%;
+    border-bottom: 1px solid gray;    
+    /* Ingen overflow: hidden */
+    /* Border-radius fungerar därför inte för knappar som ligger längst ut, */
+    /* men när sidan scrollas ner ska det inte vara någon border-radius. */
+
+}
+.navbar .items-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.navbar a{
+    display: block;
+    color: white;
+    padding: 10px 25px;    
+    min-width: 5rem;    
+    /* text-decoration transparent för transition (default är färgen från color) */
+    text-decoration-color: transparent;
+}
+    .navbar a:hover{
+        background-color: rgba(255, 255, 255, 0.200);
+        text-decoration: var(--text-decoration);
+    }
+.navbar .nav-item{
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    transition: var(--hover-transition-speed);
+}
+.navbar .toTopButton{
+    position: absolute;
+    left: 0;
+    margin: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity var(--container-transition-speed);
+}
+    .navbar .toTopButton.active{
+        visibility: visible;
+        opacity: 100;
+    }
+    .navbar .hamburger{
+        display: none;        
+    }
+    .navbar .triangle{
+        display: none;
+    }
+
+.navbar-border-fix{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 10px;
+    margin-top: -10px;    
+    background-color: var(--navbar-background);
+}
+
+/* Dropdown */
+
+.dropdown{
+    position: relative;
+}
+    .dropdown-content{
+        position: absolute;
+        background-color: var(--blue3);
+        width: max-content;
+        min-width: min-content;
+        display: none;
+    }
+        .dropdown:hover .dropdown-content{
+            display: block;
+            
+        }
+        /* Underline på översta elementet när man hovrar länkar i dropdown */
+        .dropdown:hover > .nav-item{
+            text-decoration: var(--text-decoration);
+        }
+        .dropdown-content .nav-item{
+            /* Ingen transition på dropdown items */
+            transition: none;
+            font-size: 0.9rem;
+            text-align: left;
+            padding: 25px;
+        }
+        .dropdown-content .nav-item:hover{
+            text-decoration-thickness: 2px;
+        }
+
+
+/* Mobil */
+
+@media screen and (max-width: 750px) {
+    .navbar{
+        --margin-right: 20px;
+
+        position: fixed;        
+        top: 20px;
+        right: 0;                
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        background-color: transparent;
+        border: 0;
+        max-width: 100%;
+        pointer-events: none;
+    }
+        .navbar .items-container{
+            background-color: var(--navbar-background);
+            /* margin med med auto i flex kollapsar andra sidan om det inte finns mer plats */
+            margin-right: var(--margin-right);
+            margin-left: auto; 
+            display: none;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            border-radius: 15px;
+            max-width: 100%;
+            overflow: hidden;
+
+            pointer-events: auto;
+        }
+            .navbar .items-container.hamburgerOpen{
+                display: flex;
+            }
+        .navbar .toTopButton{
+            display: none;
+        }
+            .navbar .toTopButton.active{   
+                display: flex;  
+                position: relative;
+                font-size: 1.5rem;
+            }
+        .navbar .nav-item{
+            width: 100%;
+            padding: 0 80px;
+            height: 5rem;
+            margin: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .navbar .dropdown{
+            width: 100%;
+        }
+        .navbar .dropdown-content{
+            display: none !important;
+        }
+        .navbar .hamburger{
+            /* display: flex ger jämnare storlek (fyrkantigare) än display:block  */
+            display: flex;    
+            margin-right: var(--margin-right);
+            margin-left: auto;
+            padding: 5px;
+            /* background-color: rgba(180, 180, 180, 0.5);   */
+            background-color: var(--navbar-background);
+            color: white; 
+            border-radius: 50%;
+            cursor: pointer;
+            border: 0;
+            font-size: 3.5rem;
+            transition: var(--hover-transition-speed);
+            /* För att klick ska fungera måste det vara pointer-events:auto eftersom parent har none */
+            pointer-events: auto;
+        }    
+            .navbar .hamburger:hover{
+                filter: brightness(110%);
+            }
+        .navbar .triangle{
+            display: block;
+            align-self: flex-end;
+            margin-bottom: -8px;
+            margin-right: calc(var(--margin-right) + 16px) ;
+            margin-left: auto;
+            font-size: 30px;
+            color: var(--navbar-background);
+        }
+    .navbar-border-fix{
+        display: none;
+    }
+}
+
