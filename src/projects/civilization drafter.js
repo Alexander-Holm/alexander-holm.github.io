@@ -29,32 +29,30 @@ export const civilizationDrafter = {
             Länderna läses från en JSON-fil så det finns möjlighet att lägga till nya i efterhand utan att ändra i .exe-filen. 
         </p>
         </>,
-    details: 
-        <div>
-            <ul>
-                <li>
-                    Gjord i Windows Presentation Foundation (WPF)
-                    <ul>
-                        <li>C#</li>
-                        <li>XAML för GUI</li>
-                        <li>
-                            Model View ViewModel - arkitektur
-                            <ul>
-                                <li>Data binding</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>Läsa och skriva till filer med JSON</li>
-                <li>Unit testing med xUnit</li>         
-                <li>
-                    Windowsfunktioner
-                    <ul>
-                        <li>Fönster-ikon</li> 
-                        <li>Ikon för .exe</li>   
-                        <li>Kopiera till Clipboard/Urklipp</li>
-                    </ul>
-                </li>           
-            </ul>
-        </div>
+    details:
+        <ul>
+            <li>
+                Gjord i Windows Presentation Foundation (WPF)
+                <ul>
+                    <li>C#</li>
+                    <li>XAML för GUI</li>
+                    <li>
+                        Model View ViewModel - arkitektur
+                        <ul>
+                            <li>Data binding</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Läsa och skriva till filer med JSON</li>
+            <li>Unit testing med xUnit</li>         
+            <li>
+                Windowsfunktioner
+                <ul>
+                    <li>Fönster-ikon</li> 
+                    <li>Ikon för .exe</li>   
+                    <li>Kopiera till Clipboard/Urklipp</li>
+                </ul>
+            </li>           
+        </ul>
 }
