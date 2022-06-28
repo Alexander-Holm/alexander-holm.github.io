@@ -4,106 +4,50 @@
     width: 800px;
     max-width: 100%;
 }
-    .carousel .image-container.border{
-        width: 100%;
-        border: 1px solid gray;
-        border-radius: 5px;
-        box-sizing: border-box;
-        overflow: hidden;        
+.carousel .image-container{
+    position: relative;
+    cursor: zoom-in;
+    width: 100%;
+    background-color: var(--white-darker);
+    outline: 1px solid gray;
+    border-radius: 5px;
+    /* padding-top för att behålla aspect ratio när bredden ändras */
+    /* https://www.w3schools.com/howto/howto_css_aspect_ratio.asp */
+    padding-top: 60%;
+    overflow: hidden;        
+}
+.carousel .image{
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    height: 100%;
+    max-width: 100%;
+    margin: auto;
+    object-fit: contain;
+    display: block;
+    /* Ingen fade ut, endast fade in */
+    /* Fade ut ser konstigt ut med bilder i olika storlekar */
+    animation: var(--image-fadetime) fade;
+    /* transition för hover */
+    transition: 0.35s;
+}
+    /* class .hover sätts med javascript */
+    .carousel .image.hover{
+        transform: scale(1.05);
     }
-    .carousel .image-container.inner{
-        background-color: var(--white-darker);
-        position: relative;
-        width: 100%;
-        /* padding-top för att behålla aspect ratio när bredden ändras */
-        /* https://www.w3schools.com/howto/howto_css_aspect_ratio.asp */
-        padding-top: 60%;
-        overflow: hidden;
-        cursor: pointer;
-        pointer-events: auto;
-        z-index: 2;
-    } 
-    .carousel .image{
-        position: absolute;
-        top: 0; left: 0; bottom: 0; right: 0;
-        height: 100%;
-        max-width: 100%;
-        margin: auto;
-        object-fit: contain;
-        display: block;
-        /* Ingen fade ut, endast fade in */
-        /* Fade ut ser konstigt ut med bilder i olika storlekar */
-        animation: var(--image-fadetime) fade;
+    @keyframes fade {
+        from {opacity: 0;}
+        to {opacity: 1;}
     }
-        @keyframes fade {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
-    .carousel .overlay{
-        z-index: 3;
-        position: absolute;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: transparent;
-        color: transparent;
-        font-size: min(5rem, 12vw);
-        /* pointer-events:none så att högerklick fungerar korrekt på bilderna */
-        pointer-events: none;
-        transition: var(--hover-transition-speed);
-    }
-        .carousel .overlay.active{
-            background-color: rgba(255, 255, 255, 0.1);
-            
-        }
-        .icon-inspect{
-            transition: var(--hover-transition-speed);
-            font-size: 0.5em;
-            border-radius: 10px;       
-            padding: 7px;
-        }
-            .carousel .overlay.active .icon-inspect{
-                background-color: rgba(0, 0, 0, 0.8);
-                color: rgb(240, 240, 240);
-                font-size: 0.7em;
-            }
-        
-    /* Texten måste ha en container/wrapper för att text-overflow ska fungera med width i procent. */
-    .carousel .image-description-container{        
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto;
-        height: 2rem;
-        width: 100%;
-        max-width: 40rem;        
-    }
-        .carousel .image-description-container .text{
-            color: rgb(80, 80, 80);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            animation: 0.15s dropdown-text ease-out;
-        }
-        @keyframes dropdown-text {
-            from{ 
-                margin-top: -60px;
-                opacity: 0.3;
-            }
-            to{ 
-                margin-top: 0px;
-                opacity: 1;
-            }
-        }
-.prev-image, .next-image{ 
-    z-index: 4;
-    cursor: pointer;
+
+.prev-image, .next-image{
+    z-index: 2;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    /* flex för att centrera ikonerna */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* padding istället för width och height */
     padding: 5px;
     background-color: rgba(0, 0, 0, 0.7);
@@ -111,14 +55,8 @@
     font-weight: bold;
     font-size: min(3rem, 9vw);
     border: 1px solid rgba(130, 130, 130, 0.7);
-    user-select: none;
-    /* flex för att centrera ikonerna */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.1s;
-
-    
+    user-select: none;    
+    transition: 0.1s;    
 }
     .prev-image{
         border-left: none;
@@ -128,11 +66,39 @@
         border-right: none;
     }
     .prev-image:hover, .next-image:hover{
-        background-color: rgba(40, 40, 40, 0.8);        
+        filter: contrast(0.8);      
     }
     .prev-image:active, .next-image:active{
         padding: 3px;
-        background-color: rgba(60, 60, 60, 0.9);
+    }
+
+/* Texten måste ha en container/wrapper för att text-overflow ska fungera med width i procent. */
+.carousel .image-description-container{        
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    height: 2rem;
+    width: 100%;
+    max-width: 40rem;        
+}
+    .carousel .image-description-container .text{
+        color: rgb(80, 80, 80);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        animation: 0.15s dropdown-text ease-out;
+    }
+    @keyframes dropdown-text {
+        from{ 
+            margin-top: -60px;
+            opacity: 0.3;
+        }
+        to{ 
+            margin-top: 0px;
+            opacity: 1;
+        }
     }
 
 .dot-container{
@@ -150,7 +116,6 @@
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
-    cursor: pointer;
     transition: var(--hover-transition-speed) ease;
 }
     .dot:not(.active):hover{

@@ -1,6 +1,6 @@
-import React, {useMemo, useRef, useState} from 'react';
 import  './Carousel.css';
-import {MdKeyboardArrowLeft, MdKeyboardArrowRight ,MdSearch} from "react-icons/md"
+import React, {useRef, useState} from 'react';
+import {MdKeyboardArrowLeft, MdKeyboardArrowRight} from "react-icons/md"
 import FullscreenImage from './FullscreenImage';
 
 export default function Carousel(props){
@@ -9,18 +9,7 @@ export default function Carousel(props){
     const [images] = useState(props.images);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isImageFullscreen, setIsImageFullscreen] = useState(false);
-    const [overlayActive, setOverlayActive] = useState(false);
-    
-    // useMemo för att inte uppdatera bilden varje gång overlayActive ändras av mouse-hover
-    const currentImage = useMemo(() => 
-        <FullscreenImage
-            key={currentIndex}
-            src={images[currentIndex].url}
-            className="image" 
-            isFullscreen={isImageFullscreen}
-        />
-        , [currentIndex, isImageFullscreen, images]
-    )        
+    const [imageHover, setImageHover] = useState(false);  
 
     function changeImage(senderElement, steps){
         // steps kan vara positivt för att gå framåt eller negativt för att gå bakåt
@@ -31,15 +20,20 @@ export default function Carousel(props){
         // Förhindrar onClick på element bakom next & prev knapparna
         senderElement.stopPropagation();
     }
+
+    // Ingen hover-effekt på bilden när musen är över framåt-bakåt knapparna
     const arrowButtonsHoverFunctions = {
-        onMouseEnter: () => setOverlayActive(false),
+        onMouseEnter: () => setImageHover(false),
         onMouseLeave: () => {
             const isImageContainerHovered = imageContainerRef.current.matches(":hover");
-            setOverlayActive(isImageContainerHovered);
+            setImageHover(isImageContainerHovered);
         },
     }
+
+    // Sätt bilden till fullscreen när man trycker på containern.
+    // Är bättre eftersom bilden inte alltid fyller containern.
     function onClickImageContainer(senderElement){
-        setOverlayActive(false);
+        setImageHover(false);
         setIsImageFullscreen(!isImageFullscreen); 
         // Förhindrar onClick på <FullScreenImage>
         senderElement.stopPropagation();
@@ -51,30 +45,27 @@ export default function Carousel(props){
 
     return(
         <div className="carousel">
-            {/* Border som div för att inte få hover-effekt när muspekaren är över bordern */}
-            <div className="image-container border">
-                <div className="image-container inner" ref={imageContainerRef} 
-                    onClick={(element) => onClickImageContainer(element)}
-                    onMouseEnter={() => setOverlayActive(true)} onMouseLeave={() => setOverlayActive(false)}
-                >
-                    {/* Hover overlay */}
-                    {/* overlay har pointer-events:none för att högerklick ska fungera korrekt på bilderna */}
-                    <div className={overlayActive ? "overlay active" : "overlay"} >
-                        <MdSearch className="icon-inspect"/>
-                    </div>
+            <div className="image-container"
+                ref={imageContainerRef} 
+                onClick={(element) => onClickImageContainer(element)}
+                onMouseEnter={() => setImageHover(true)} onMouseLeave={() => setImageHover(false)}
+            >
 
-                    {/* Framåt & bakåt knappar */}
-                    <button className="prev-image" {...arrowButtonsHoverFunctions} onClick={(element) => changeImage(element, -1)} >                        
-                        <MdKeyboardArrowLeft />
-                    </button>
-                    <button className="next-image" {...arrowButtonsHoverFunctions} onClick={(element) => changeImage(element, +1)} >
-                        <MdKeyboardArrowRight />
-                    </button>
-                    
-                    {/* Bild */}
-                    {currentImage}
+                {/* Framåt & bakåt knappar */}
+                <button className="prev-image" {...arrowButtonsHoverFunctions} onClick={(element) => changeImage(element, -1)} >                        
+                    <MdKeyboardArrowLeft />
+                </button>
+                <button className="next-image" {...arrowButtonsHoverFunctions} onClick={(element) => changeImage(element, +1)} >
+                    <MdKeyboardArrowRight />
+                </button>
 
-                </div>
+                {/* Bild */}
+                <FullscreenImage
+                    key={currentIndex}
+                    src={images[currentIndex].url}
+                    className={imageHover ? "image hover" : "image"}
+                    isFullscreen={isImageFullscreen}
+                />
             </div>
 
             {/* Bildbeskrivning */}
@@ -91,8 +82,11 @@ export default function Carousel(props){
             <div className="dot-container">
                 {images.map((img, index) => {
                     return(
-                        <span key={index} onClick={() => setCurrentIndex(index)}
-                            className={(currentIndex === index) ? "dot active" : "dot" }  />
+                        <span 
+                            key={index} 
+                            onClick={() => setCurrentIndex(index)}
+                            className={(currentIndex === index) ? "dot active" : "dot" }  
+                        />
                     );
                 })}
             </div> 
