@@ -37,16 +37,14 @@ export const pokemonApp = {
         </p>
         </>
     ,details: 
-        <div>
-            <ul>
-                <li>Gjord med React Native för både Android och iOS
-                    <ul>
-                        <li>Javascript</li>
-                    </ul>
-                </li>
-                <li>Hämtar data från API</li>  
-                <li>Header med ikoner och dynamisk text</li>
-                <li>Component som kan återanvändas med olika utseende</li>
-            </ul>
-        </div>
+        <ul>
+            <li>Gjord med React Native för både Android och iOS
+                <ul>
+                    <li>Javascript</li>
+                </ul>
+            </li>
+            <li>Hämtar data från API</li>  
+            <li>Header med ikoner och dynamisk text</li>
+            <li>Component som kan återanvändas med olika utseende</li>
+        </ul>
 }
