@@ -14,11 +14,12 @@ export default function Carousel(props){
     // useMemo för att inte uppdatera bilden varje gång overlayActive ändras av mouse-hover
     const currentImage = useMemo(() => 
         <FullscreenImage
+            key={currentIndex}
             src={images[currentIndex].url}
             className="image" 
             isFullscreen={isImageFullscreen}
         />
-        ,[currentIndex, isImageFullscreen, images]
+        , [currentIndex, isImageFullscreen, images]
     )        
 
     function changeImage(senderElement, steps){
