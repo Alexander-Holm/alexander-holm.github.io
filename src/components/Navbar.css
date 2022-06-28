@@ -33,7 +33,7 @@
         text-decoration: var(--text-decoration);
     }
 .navbar .nav-item{
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     text-align: center;
     transition: var(--hover-transition-speed);
@@ -89,7 +89,8 @@
         .dropdown-content .nav-item{
             /* Ingen transition på dropdown items */
             transition: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            font-weight: 600;
             text-align: left;
             padding: 25px;
         }
