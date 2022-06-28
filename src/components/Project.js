@@ -21,9 +21,11 @@ export default function Project({
             
             <Carousel images={images}/>
 
-            <div className="content-section description" >
-                {description}
-                <Expander title="Detaljer" style={{marginTop:"20px"}} isExpanded={true}> {details} </Expander>
+            <div className="content-section">
+                <div className='description'>
+                    {description}
+                </div>
+                <Expander title="Detaljer" isExpanded={true}> {details} </Expander>
             </div>
 
         </div>

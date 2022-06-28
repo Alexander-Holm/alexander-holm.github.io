@@ -28,6 +28,9 @@ body{
     background-size: cover;
     overflow: auto;
 }
+p{
+    line-height: 1.6;
+}
 h1{
     color: var(--blue1);
     font-size: 2rem;
