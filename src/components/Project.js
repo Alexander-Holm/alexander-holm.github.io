@@ -13,7 +13,7 @@ export default function Project({
     details
 }){    
     return(
-        <div id={id} className="content-section project-container" >
+        <article id={id} className="content-section project-container" >
             <div className="content-section header" >
                 <h3 style={{marginRight: "15px"}}>{title}</h3>
                 {github && <GithubButton url={github} />}
@@ -28,6 +28,8 @@ export default function Project({
                 <Expander title="Detaljer" isExpanded={true}> {details} </Expander>
             </div>
 
-        </div>
+            <hr/>
+
+        </article>
     );
 }

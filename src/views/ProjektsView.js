@@ -22,7 +22,6 @@ export const ProjektsView =
 
         {projects.map(p => {
             return(
-                <>
                 <Project 
                     key = {p.title}
                     title = {p.title}
@@ -32,8 +31,6 @@ export const ProjektsView =
                     description = {p.description}
                     details = {p.details}
                 /> 
-                <hr/>
-                </>  
             );
         })}
     </section>
