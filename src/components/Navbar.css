@@ -1,18 +1,13 @@
 .navbar{
     --text-decoration: 3px underline var(--orange-navbar);
 
-    /* TODO: kommentar varför navbar-border-fix */
     z-index: 99;
     position: sticky;
     top: 0;
     background-color: var(--navbar-background);
     transition: border-radius var(--container-transition-speed);
     width: 100%;
-    border-bottom: 1px solid gray;    
-    /* Ingen overflow: hidden */
-    /* Border-radius fungerar därför inte för knappar som ligger längst ut, */
-    /* men när sidan scrollas ner ska det inte vara någon border-radius. */
-
+    border-bottom: 1px solid gray;
 }
 .navbar .items-container{
     display: flex;
@@ -57,16 +52,8 @@
         display: none;
     }
 
-.navbar-border-fix{
-    position: sticky;
-    top: 0;
-    width: 100%;
-    height: 10px;
-    margin-top: -10px;    
-    background-color: var(--navbar-background);
-}
 
-/* Dropdown */
+/* --- Dropdown --- */
 
 .dropdown{
     position: relative;
@@ -99,7 +86,7 @@
         }
 
 
-/* Mobil */
+/* --- Mobil --- */
 
 @media screen and (max-width: 750px) {
     .navbar{

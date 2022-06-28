@@ -21,7 +21,6 @@ export default function Navbar(props){
     );
 
     return(
-        <>
         <nav className="navbar" style={props.style} >
             <button className="hamburger" onClick={() => setIsHamburgerOpen(!isHamburgerOpen)}>
                 {isHamburgerOpen
@@ -40,7 +39,5 @@ export default function Navbar(props){
                 })}
             </div>
         </nav>
-        <div className="navbar-border-fix" />
-        </>
     );
 }

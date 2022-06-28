@@ -59,15 +59,19 @@ function App() {
     }, [containerVerticalMargin, defaultBorderRadius])
 
     return (  
-        <div className="container" style={{margin: hasVerticalMargin ? `${containerVerticalMargin}  auto` : "0 auto"}}>
-            <Navbar items={navItems} showTopButton={!isTopMarginVisible} style={{borderRadius: `${containerBorderRadius} ${containerBorderRadius} 0 0`}}/>
+        <div className="container" style={{
+            margin: hasVerticalMargin ? `${containerVerticalMargin}  auto` : "0 auto",
+            borderRadius: containerBorderRadius
+        }}>
 
-            <div className="content" style={{borderRadius: `0 0 ${containerBorderRadius} ${containerBorderRadius}`}}>
+            <Navbar items={navItems} showTopButton={!isTopMarginVisible}/>
+            <main className="content" >
                 {ProfilView}
                 {ProjektsView}
                 {KompetensView}
                 {KontaktView}
-            </div> 
+            </main> 
+
         </div>
     );
 }
