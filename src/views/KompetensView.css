@@ -3,6 +3,22 @@
     color: var(--blue3);
     font-size: 1.05rem;
 }
+    /* Lite hackig lösning */
+    /* 
+        Det går inte att sätta text-decoration på <Expander> headern,
+        eftersom det går inte att samtidigt ta bort det för pilen.
+        
+        https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
+        "   Text decorations are drawn across descendant text elements. 
+            This means that if an element specifies a text decoration, 
+            then a child element can't remove the decoration.           "
+    */
+    #kompetens .expander-header :nth-child(2){
+        text-decoration: 1px solid underline transparent;
+    }
+    #kompetens .expander-header:hover :nth-child(2){
+        text-decoration-color: inherit;
+    }
 #kompetens .expander-details{
     border: none;
     padding-top: 0px;
