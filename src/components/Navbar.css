@@ -22,19 +22,18 @@
     color: white;
     padding: 10px 25px;    
     min-width: 5rem;    
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    transition: var(--hover-transition-speed);
     /* text-decoration transparent för transition (default är färgen från color) */
     text-decoration-color: transparent;
+
 }
     .navbar a:hover{
         background-color: rgba(255, 255, 255, 0.200);
         text-decoration: var(--text-decoration);
     }
-.navbar .nav-item{
-    font-size: 1.1rem;
-    font-weight: bold;
-    text-align: center;
-    transition: var(--hover-transition-speed);
-}
 .navbar .toTopButton{
     position: absolute;
     left: 0;
@@ -46,49 +45,55 @@
     .navbar .toTopButton.active{
         visibility: visible;
         opacity: 100;
-    }
-    .navbar .hamburger{
-        display: none;        
-    }
-    .navbar .triangle{
-        display: none;
-    }
+    }   
 
 
 /* --- Dropdown --- */
 
 .dropdown{
     position: relative;
+}   
+.dropdown-content{
+    position: absolute;
+    background-color: var(--color-secondary);
+    width: max-content;
+    min-width: min-content;
+    display: none;
 }
-    .dropdown-content{
-        position: absolute;
-        background-color: var(--color-secondary);
-        width: max-content;
-        min-width: min-content;
-        display: none;
+    .dropdown:hover .dropdown-content{
+        display: block;
+        
     }
-        .dropdown:hover .dropdown-content{
-            display: block;
-            
-        }
-        /* Underline på översta elementet när man hovrar länkar i dropdown */
-        .dropdown:hover > .nav-item{
-            text-decoration: var(--text-decoration);
-        }
-        .dropdown-content .nav-item{
-            /* Ingen transition på dropdown items */
-            transition: none;
-            font-size: 0.95rem;
-            font-weight: 600;
-            text-align: left;
-            padding: 25px;
-        }
-        .dropdown-content .nav-item:hover{
-            text-decoration-thickness: 2px;
-        }
+.dropdown-content a{
+    /* Ingen transition på dropdown items */
+    transition: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: left;
+    padding: 25px;
+}
+    /* Underline på översta elementet när man hovrar länkar i dropdown */
+    .dropdown:hover > a{
+        text-decoration: var(--text-decoration);
+    }
+    .dropdown-content a:hover{
+        text-decoration-thickness: 2px;
+    }
+.dropdown .dropdown-arrow{
+    font-size: 0.6em;
+    margin-left: 6px;
+    transform: rotate(180deg);
+}
 
 
 /* --- Mobil --- */
+
+.navbar .hamburger{
+    display: none;        
+}
+.navbar .triangle{
+    display: none;
+}
 
 @media screen and (max-width: 750px) {
     .navbar{
@@ -128,7 +133,7 @@
                 position: relative;
                 font-size: 1.5rem;
             }
-        .navbar .nav-item{
+        .navbar a{
             width: 100%;
             padding: 0 80px;
             height: 5rem;
