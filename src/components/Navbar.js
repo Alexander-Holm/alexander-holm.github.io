@@ -33,9 +33,9 @@ export default function Navbar(props){
                 }
             </button>
             {isHamburgerOpen && <IoTriangleSharp className="triangle"/> }
-            <div className={`items-container ${isHamburgerOpen && "hamburgerOpen"}`} >
+            <div className={`items-container ${isHamburgerOpen ? "hamburgerOpen" : ""}`} >
                
-                <NavItem href="#" className={`toTopButton ${props.showTopButton && "active"}`}>🡅</NavItem>
+                <NavItem href="#" className={`toTopButton ${props.showTopButton ? "active" : ""}`}>🡅</NavItem>
                 {props.items.map(item => {
                     if("dropdown" in item)
                         return <Dropdown item={item} key={item.title} />
