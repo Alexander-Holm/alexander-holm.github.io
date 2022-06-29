@@ -15,7 +15,7 @@
         user-select: none;
         box-sizing: border-box;
 
-        background-color: var(--blue-light);
+        background-color: var(--blue4);
         color: white;
         /* border: 1px solid lightgray; */
         /* padding lägger pilen i linje med punkterna från listan (<ul>) */

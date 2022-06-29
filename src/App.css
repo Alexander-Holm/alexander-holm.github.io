@@ -3,13 +3,7 @@
     --blue1: #002742;
     --blue2: #004677;
     --blue3: #005fa3;
-    /* Går inte att göra om variabel rgb till rgba, */
-    /* men kan använda färg som rgb-decimaler i rgba(var(), opacity) */
-    --blue-light-rgb: 0, 160, 255;
-    --blue-light: rgb(0, 160, 255);
-    --orange-navbar: #ffa600;
-
-    --navbar-background: var(--blue-light);
+    --blue4: rgb(0, 162, 255);
 
     --hover-transition-speed: 0.1s;    
     --container-transition-speed: 0.5s;
@@ -119,5 +113,5 @@ ul{
     ul ul ul{list-style-type: disc;}
     ul ul ul li::marker{
         font-size: 1.2rem;
-        color: var(--blue-light);
+        color: var(--blue4);
     }

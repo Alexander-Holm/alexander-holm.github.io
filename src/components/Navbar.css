@@ -1,10 +1,12 @@
 .navbar{
-    --text-decoration: 3px underline var(--orange-navbar);
+    --text-decoration: 3px underline #ffa600;
+    --color-primary: var(--blue4);
+    --color-secondary: var(--blue3);
 
     z-index: 99;
     position: sticky;
     top: 0;
-    background-color: var(--navbar-background);
+    background-color: var(--color-primary);
     transition: border-radius var(--container-transition-speed);
     width: 100%;
     border-bottom: 1px solid gray;
@@ -60,7 +62,7 @@
 }
     .dropdown-content{
         position: absolute;
-        background-color: var(--blue3);
+        background-color: var(--color-secondary);
         width: max-content;
         min-width: min-content;
         display: none;
@@ -90,24 +92,23 @@
 
 @media screen and (max-width: 750px) {
     .navbar{
-        --margin-right: 20px;
-
-        position: fixed;        
+        position: sticky;        
         top: 20px;
-        right: 0;                
+        right: 0;    
+        padding: 0 30px;  
+        box-sizing: border-box;          
         display: flex;
         flex-direction: column;
         align-items: flex-end;
         background-color: transparent;
         border: 0;
         max-width: 100%;
-        pointer-events: none;
     }
         .navbar .items-container{
-            background-color: var(--navbar-background);
+            background-color: var(--color-primary);
             /* margin med med auto i flex kollapsar andra sidan om det inte finns mer plats */
-            margin-right: var(--margin-right);
-            margin-left: auto; 
+            position: absolute;
+            top: 7em;
             display: none;
             flex-direction: column;
             align-content: center;
@@ -115,8 +116,6 @@
             border-radius: 15px;
             max-width: 100%;
             overflow: hidden;
-
-            pointer-events: auto;
         }
             .navbar .items-container.hamburgerOpen{
                 display: flex;
@@ -146,33 +145,27 @@
             display: none !important;
         }
         .navbar .hamburger{
+            position: absolute;
             /* display: flex ger jämnare storlek (fyrkantigare) än display:block  */
-            display: flex;    
-            margin-right: var(--margin-right);
-            margin-left: auto;
+            display: flex;
             padding: 5px;
-            /* background-color: rgba(180, 180, 180, 0.5);   */
-            background-color: var(--navbar-background);
+            background-color: var(--color-primary);
             color: white; 
             border-radius: 50%;
-            cursor: pointer;
             border: 0;
             font-size: 3.5rem;
             transition: var(--hover-transition-speed);
-            /* För att klick ska fungera måste det vara pointer-events:auto eftersom parent har none */
-            pointer-events: auto;
         }    
             .navbar .hamburger:hover{
                 filter: brightness(110%);
             }
         .navbar .triangle{
+            position: absolute;
+            top: 3.8em;
+            right: 1.75em;
+            font-size: 1.5rem;
             display: block;
-            align-self: flex-end;
-            margin-bottom: -8px;
-            margin-right: calc(var(--margin-right) + 16px) ;
-            margin-left: auto;
-            font-size: 30px;
-            color: var(--navbar-background);
+            color: var(--color-primary);
         }
     .navbar-border-fix{
         display: none;
