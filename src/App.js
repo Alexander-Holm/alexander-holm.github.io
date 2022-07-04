@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
 import {KompetensView} from './views/KompetensView'
@@ -13,59 +13,26 @@ function App() {
         {title: "Projekt", link: "#projekt", dropdown: projects.map(project => ({title: project.title, link: `#${project.id}`}) ) },
         {title: "Kompetens", link: "#kompetens"},
         {title: "Kontakt", link: "#kontakt"},
-    ]
+    ];
 
-    const [hasVerticalMargin, setHasVerticalMargin] = useState()
-    const [isTopMarginVisible, setIsTopMarginVisible] = useState(true)
-    const [containerVerticalMargin] = useState("50px");
-    const [defaultBorderRadius] = useState("5px");
-    const [containerBorderRadius, setContainerBorderRadius] = useState(defaultBorderRadius)
-
-    
-    useLayoutEffect(() => {    
-        const scrollHandler = () => {
-            // parsefloat tar bort tecken efter ett nummer, t.ex. 'px'
-            if( window.pageYOffset > parseFloat(containerVerticalMargin, 10))
-                setIsTopMarginVisible(false);            
-            else setIsTopMarginVisible(true);
-        }
-        const mediaQueryHandler = (mediaQuery) => {
-            if(mediaQuery.matches){
-                setHasVerticalMargin(false);
-                setContainerBorderRadius(0)
-            }
-            else{
-                setHasVerticalMargin(true);
-                scrollHandler();
-                setContainerBorderRadius(defaultBorderRadius)
-            }
-        }
-
-        /* --- Höjer upp containern när bakgrunden inte längre syns på sidorna --- */
-        /* max-width lite större än width för .container eftersom Firefox inte räknar med scrollbar i width.*/
-        /* För tidigt ser bättre ut än för sent. */
-        const containerWidth = getComputedStyle(document.documentElement).getPropertyValue('--container-width');
-        const mediaQuery = window.matchMedia(`(max-width: calc(${containerWidth} + 20px))`);
-        mediaQuery.addEventListener("change", mediaQueryHandler);      
-        
-        window.addEventListener("scroll", scrollHandler, {passive: true} );
-
-        mediaQueryHandler(mediaQuery);        
-
-        return () => {
-             mediaQuery.removeEventListener("change", mediaQueryHandler);
-             window.removeEventListener("scroll", scrollHandler);
-        };
-    }, [containerVerticalMargin, defaultBorderRadius])
+    // Hade problem med att hörnen längst upp på navbaren 
+    // var vita utanför border-radius en kort stund när man scrollar ner.
+    // Sätter därför border-radius till 0 när navbaren når toppen av skärmen.
+    const [isNavSticky, setIsNavSticky] = useState(false);    
+    const navRef = useRef();
+    const navObserver = new IntersectionObserver(([nav]) => {
+        setIsNavSticky(!nav.isIntersecting);
+    }, {threshold: 1, rootMargin: "-1px"});    
+    useEffect(() => {
+        navObserver.observe(navRef.current);
+    },[])
 
     return (  
-        <div className="container" style={{
-            margin: hasVerticalMargin ? `${containerVerticalMargin}  auto` : "0 auto",
-            borderRadius: containerBorderRadius
-        }}>
-
-            <Navbar items={navItems} showTopButton={!isTopMarginVisible}/>
-            <main className="content" >
+        <div id="container" 
+            style={{ ...isNavSticky && { borderRadius: 0 }}}
+        >
+            <Navbar ref={navRef} items={navItems} />
+            <main>
                 {ProfilView}
                 {ProjektsView}
                 {KompetensView}
