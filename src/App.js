@@ -29,7 +29,10 @@ function App() {
 
     return (  
         <div id="container" 
-            style={{ ...isNavSticky && { borderRadius: 0 }}}
+            style={{ ...isNavSticky && { 
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0,
+            }}}
         >
             <Navbar ref={navRef} items={navItems} />
             <main>
@@ -38,7 +41,6 @@ function App() {
                 {KompetensView}
                 {KontaktView}
             </main> 
-
         </div>
     );
 }

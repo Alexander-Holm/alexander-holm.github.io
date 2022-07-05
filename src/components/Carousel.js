@@ -44,7 +44,7 @@ export default function Carousel(props){
         return null;
 
     return(
-        <div className="carousel">
+        <div className="carousel fill-width">
             <div className="image-container"
                 ref={imageContainerRef} 
                 onClick={(element) => onClickImageContainer(element)}

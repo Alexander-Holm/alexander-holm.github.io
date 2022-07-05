@@ -1,14 +1,12 @@
-.project-container{
-    width: 100%;
-}
-.project-container .header{
+
+.project .header{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
 }
-.project-container .description{
+.project .description{
     margin-top: 20px;
     margin-bottom: 60px;
 }

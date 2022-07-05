@@ -13,20 +13,19 @@ export default function Project({
     details
 }){    
     return(
-        <article id={id} className="content-section project-container" >
-            <div className="content-section header" >
+        <article id={id} className="project" >
+            <div className="header" >
                 <h3 style={{marginRight: "15px"}}>{title}</h3>
                 {github && <GithubButton url={github} />}
             </div>
             
             <Carousel images={images}/>
 
-            <div className="content-section">
-                <div className='description'>
-                    {description}
-                </div>
-                <Expander title="Detaljer" isExpanded={true}> {details} </Expander>
+            <div className='description'>
+                {description}
             </div>
+
+            <Expander title="Detaljer" isExpanded={true}> {details} </Expander>
 
             <hr/>
 

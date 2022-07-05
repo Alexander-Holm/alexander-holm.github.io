@@ -28,12 +28,14 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: fit-content;
+    margin-inline: auto;
+    margin-top: 20px;
     color: var(--blue2);
     cursor: pointer;
     text-decoration: none;
     border-bottom: 2px solid var(--blue2);
     padding-bottom: 3px;
-    margin-top: 20px;
 }
     #cv .icon{
         font-size: 1.7rem;

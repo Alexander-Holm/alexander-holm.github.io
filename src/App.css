@@ -28,30 +28,26 @@ p{
 h1{
     color: var(--blue1);
     font-size: 2rem;
+    text-align: center;
 }
 h2{
     color: var(--blue2);
     font-size: 1.7rem;
     text-align: center;
-    margin: 0;
 }
 h3{
     font-size: 1.5rem;
     color: var(--blue3);
+    margin: 0;
 }
 h4{
     color: var(--blue3);
 }
-hr{
-    width: 100%;
-    height: 1px;
-    margin: 100px 0;
-    background: var(--blue3);
-    background: linear-gradient(90deg, rgba(0,0,0,0) 0%, var(--blue3) 50%, rgba(0,0,0,0) 100%);
-    border: none;
-}
+
 #container{
-    width: 1000px;
+    --container-width : 1000px;
+
+    width: var(--container-width);
     max-width: 100%;
     margin: 50px auto;
     border-radius: 5px;
@@ -71,29 +67,38 @@ hr{
         }
     }
 main{
+    --main-padding-inline: 50px;
+    /* 
+        position:relative och z-index för att skapa en ny stacking context
+        så att navbaren alltid ligger över innehållet i main oavsett z-index
+     */
     z-index: 1;
     position: relative;
     background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: stretch;
-    width: 100%;
-    padding: 30px 50px;
+    padding: 30px var(--main-padding-inline);
     padding-bottom: 100px;
-    box-sizing: border-box;
 }
-
-.content-section{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* rem istället för px så att storleken baseras på webbläsarens font-size. */
-    /* För läsbarheten ska det inte vara för många tecken på en rad. */
+section{
+    /* För läsbarheten ska det inte vara för många tecken på en rad, 40 rem är lagom */
     width: 40rem;
     max-width: 100%;
     margin: 0 auto;
+}
+
+hr{
+    height: 1px;
+    margin: 100px 0;
+    background: var(--blue3);
+    background: linear-gradient(90deg, rgba(0,0,0,0) 0%, var(--blue3) 50%, rgba(0,0,0,0) 100%);
+    border: none;
+}
+/* Fyller width av main */
+.fill-width, hr{
+    width: calc( var(--container-width) - (var(--main-padding-inline) * 2) );
+    max-width: calc( 100vw - (var(--main-padding-inline) * 2) );
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* ::marker fungerar bara med font-size och color i Safari. */

@@ -6,7 +6,7 @@ import Project from '../components/Project.js'
 export const ProjektsView =
     <section id="projekt">
         <h2>Projekt</h2>
-        <div className="content-section projects-overview">
+        <div className="projects-overview">
             {projects.map(p => {
                 return(
                     <a key={p.title} className="project" href={"#" + p.id}>
